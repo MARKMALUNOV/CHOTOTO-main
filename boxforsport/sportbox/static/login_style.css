@@ -1,0 +1,122 @@
+/* Центрування форми на сторінці */
+.materialContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f7fb;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+/* Контейнер картки */
+.box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(149, 157, 165, 0.2);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+/* Заголовок */
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* Блоки введення */
+.input {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.input input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Ефект підсвічування при фокусі (імітація магії .spin) */
+.input input:focus {
+    border-color: #4a90e2;
+}
+
+.input input:focus + .spin {
+    width: 100%;
+}
+
+/* Лінія підкреслення (якщо хочете ефект Material Design) */
+.spin {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #4a90e2;
+    transition: width 0.3s ease;
+}
+
+/* Кнопка */
+.button.login {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.button.login button {
+    width: 100%;
+    padding: 14px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.button.login button:hover {
+    background-color: #357abd;
+}
+
+.button.login button:active {
+    transform: scale(0.98);
+}
+
+/* Посилання на реєстрацію */
+.box a {
+    display: block;
+    text-align: center;
+    color: #4a90e2;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.box a:hover {
+    color: #23527c;
+    text-decoration: underline;
+}
