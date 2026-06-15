@@ -1,8 +1,11 @@
+import sqlite3
+
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from polls.models import Habit
+
+#from boxforsport.polls.models import Habit
 
 class log(View):
     def get(self, request):
@@ -53,7 +56,17 @@ class main(View):
     def get(self, request):
         if not request.user.is_authenticated:
             return redirect('login')
-        return render(request, 'app.html')
+        conn = sqlite3.connect("db.sqlite3")
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM polls_habit")
+        rows = cursor.fetchall()
+
+        conn.close()
+        #habits = Habit.objects.all()
+        print(rows[0])
+        return render(request, 'app.html', {'habits': rows})
+        #return render(request, 'app.html')
 
 
 # Обов'язково додаємо функціонал для виходу з системи

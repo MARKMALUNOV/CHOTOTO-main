@@ -34,7 +34,20 @@
 
 <div class="content">
     <h2>Ваші звички</h2>
-    <div id="habits-list"></div>
+    <div id="habits-list">
+
+        {% for habit in habits %}
+
+
+        <div class="habit-item">
+                <span class="habit-name">{{ habit.0 }}  <!-- name --></span>
+                <div>
+                    <button class="btn-menu" style="background:#28a745; padding: 5px 10px;" onclick="markDone(this)">Done today</button>
+                    <button class="btn-menu" style="background:#dc3545; padding: 5px 10px;" onclick="this.parentElement.parentElement.remove()">Видалити</button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 
 <div class="modal" id="modal">
