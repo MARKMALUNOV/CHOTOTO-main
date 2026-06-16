@@ -8,33 +8,52 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
+from django.http import JsonResponse
 
-@csrf_exempt
 def add_habit(request):
+
+    if request.method == "GET":
+
+        habit_name = request.GET.get("name")
+        conn = sqlite3.connect("db.sqlite3")
+        cursor = conn.cursor()
+        cursor.execute(
+            "INSERT INTO polls_habit (name) VALUES (?)",
+            (habit_name,)
+        )
+
+        conn.commit()
+        conn.close()
+        print("DEBUG:", habit_name)
+
+        # тут поки просто перевірка
+        return JsonResponse({
+            "success": True,
+            "habit": habit_name
+        })
+@csrf_exempt
+def add_habit2(request):
     if request.method == "GET":
         data = json.loads(request.body)
 
         habit_name = data.get("name")
 
+        conn = sqlite3.connect("db.sqlite3")
+        cursor = conn.cursor()
 
-        save_habit(habit_name)
+        cursor.execute(
+            "INSERT INTO polls_habit (name) VALUES (?)",
+            (habit_name,)
+        )
+
+        conn.commit()
+        conn.close()
 
         return JsonResponse({
             "success": True,
             "habit": habit_name
         })
-#from boxforsport.polls.models import Habit
-def save_habit(name):
-    conn = sqlite3.connect("db.sqlite3")
-    cursor = conn.cursor()
 
-    cursor.execute(
-        "INSERT INTO polls_habit (name) VALUES (?)",
-        (name,)
-    )
-
-    conn.commit()
-    conn.close()
 
 class log(View):
     def get(self, request):
