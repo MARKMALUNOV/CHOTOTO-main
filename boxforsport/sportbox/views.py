@@ -4,8 +4,37 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
+
+@csrf_exempt
+def add_habit(request):
+    if request.method == "GET":
+        data = json.loads(request.body)
+
+        habit_name = data.get("name")
+
+
+        save_habit(habit_name)
+
+        return JsonResponse({
+            "success": True,
+            "habit": habit_name
+        })
 #from boxforsport.polls.models import Habit
+def save_habit(name):
+    conn = sqlite3.connect("db.sqlite3")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "INSERT INTO polls_habit (name) VALUES (?)",
+        (name,)
+    )
+
+    conn.commit()
+    conn.close()
 
 class log(View):
     def get(self, request):
